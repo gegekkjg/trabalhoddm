@@ -1,17 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
+import { useState } from 'react';
+
 
 export default function App() {
+
   const [valorLitro, setValorLitro] = useState('');
   const [quantidadeAbas, setQuantidadeAbas] = useState('');
   const [kmRodado, setKmRodado] = useState('');
   const [resultado, setResultado] = useState('');
+
+  const calcrRs = (valorLitro, quantidadeAbas, kmRodado) => {
+    let intvl = parseFloat(valorLitro);
+    let intqa = parseFloat(quantidadeAbas);
+    let intkr = parseFloat(kmRodado);
+    setResultado(((intvl * intqa) / intkr).toFixed(2));
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}> Valor do Litro </Text>
       <View style={styles.viewInput}>
           <TextInput
+            value={valorLitro}
+            onChangeText={setValorLitro}
             keyboardType="number-pad"
             placeholder="Digite o valor"
             style={styles.input}
@@ -20,6 +32,8 @@ export default function App() {
         <Text style={styles.titulo2}> Quantidade abestecida </Text>
       <View style={styles.viewInput}>
           <TextInput
+            value={quantidadeAbas}
+            onChangeText={setQuantidadeAbas}
             keyboardType="number-pad"
             placeholder="Digite o valor"
             style={styles.input}
@@ -28,6 +42,8 @@ export default function App() {
         <Text style={styles.titulo3}> Km rodado </Text>
       <View style={styles.viewInput}>
           <TextInput
+            value={kmRodado}
+            onChangeText={setKmRodado}
             keyboardType="number-pad"
             placeholder="Digite o valor"
             style={styles.input}
@@ -35,13 +51,20 @@ export default function App() {
         </View>
         <View style={styles.center}>
         <Pressable
-            onPress={() => calcrArea(baseMaior, baseMenor, altura)}
+            onPress={() => calcrRs(valorLitro, quantidadeAbas, kmRodado)}
             style={styles.botao}>
             <Text style={{ fontSize: 20, color: 'white' }}>
               Calcular
             </Text>
           </Pressable>
         </View>
+        <View style={styles.center}>
+          <View style={styles.botaoResultado}>
+            <Text style={styles.textoBotao}>Resultado R$: </Text>
+            <Text style={styles.textoBotao}>{resultado}</Text>
+          </View>
+        </View>
+
         <StatusBar style="auto" />
     </View>
   );
