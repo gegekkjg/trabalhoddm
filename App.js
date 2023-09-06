@@ -17,8 +17,16 @@ export default function App() {
     setResultado(((intvl * intqa) / intkr).toFixed(2));
   };
 
+  const limparDados = () => {
+    setValorLitro('');
+    setQuantidadeAbas('');
+    setKmRodado('');
+    setResultado('');
+  };
+
   return (
     <View style={styles.container}>
+      <Text style={styles.texto}>Autonomia de Gasto de Combustível</Text>
       <Text style={styles.titulo}> Valor do Litro </Text>
       <View style={styles.viewInput}>
           <TextInput
@@ -50,15 +58,22 @@ export default function App() {
           />
         </View>
         <View style={styles.center}>
-        <Pressable
-            onPress={() => calcrRs(valorLitro, quantidadeAbas, kmRodado)}
-            style={styles.botao}>
-            <Text style={{ fontSize: 20, color: 'white' }}>
-              Calcular
-            </Text>
-          </Pressable>
         </View>
-        <View style={styles.center}>
+        <View style={styles.botoes}>
+          <Pressable
+              onPress={() => calcrRs(valorLitro, quantidadeAbas, kmRodado)}
+              style={styles.botao}>
+              <Text style={{ fontSize: 20, color: 'white' }}>
+                Calcular
+              </Text>
+            </Pressable>
+          <Pressable onPress={limparDados} style={styles.botao}>
+              <Text style={{ fontFamily: 'rubik', fontSize: 20, color: 'white' }}>
+                Limpar Conteúdo
+              </Text>
+            </Pressable>
+          </View>
+          <View style={styles.center}>
           <View style={styles.botaoResultado}>
             <Text style={styles.textoBotao}>Resultado R$: </Text>
             <Text style={styles.textoBotao}>{resultado}</Text>
@@ -78,6 +93,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#bdd6d2',
 
+  },
+  texto:{
+    textAlign: 'center'
   },
   viewInput: {
     alignItems: 'center',
@@ -121,7 +139,7 @@ const styles = StyleSheet.create({
     borderColor: '#e3e5d7',
     borderRadius: 20,
     height: 50,
-    width: 200,
+    width: 150,
     fontSize: 15,
     color: '#f6eddc',
   },
@@ -142,6 +160,9 @@ const styles = StyleSheet.create({
   textoBotao:{
     fontSize: 20,
     color: 'white', 
-  }
+  },
+  botoes: {
+    flexDirection: 'row',
+  },
 
 });
