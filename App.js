@@ -68,10 +68,10 @@ export default function App() {
               </Text>
             </Pressable>
           <Pressable onPress={limparDados} style={styles.botao}>
-              <Text style={{ fontFamily: 'rubik', fontSize: 20, color: 'white' }}>
+              <Text style={{ fontSize: 20, color: 'white' }}>
                 Limpar Conteúdo
               </Text>
-            </Pressable>
+            </Pressable>h
           </View>
           <View style={styles.center}>
           <View style={styles.botaoResultado}>
